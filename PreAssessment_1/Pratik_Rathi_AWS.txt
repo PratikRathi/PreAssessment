@@ -1,0 +1,120 @@
+﻿PRE-ASSESSMENT TEST
+PRATIK RATHI
+
+
+AWS
+
+
+IAM policy which grants access to S3 buckets only
+
+
+1. Go to AWS Console.
+2. Click on S3.
+3. Click on Create Bucket and enter relevant details such as Bucket Name and Region.
+4. Click Create.
+5. Now, Create a folder in the Bucket. (For future verification purpose)
+6. Go to IAM and create a User.
+7. Enter Username and Password.
+8. Now, give him full access to the S3 Buckets.
+9. Under the summary section of the user, go to security credential and attach MFA.
+10.  Now login with the user credential.
+11. Go to the folder created and verify by trying uploading and deleting files.
+12. So, you have created an IAM policy for that user to access S3 buckets.
+
+
+Programmatic Access
+
+
+1. Go to your account and select security credentials.
+2. In Policies, select create policy.
+3. Select create your own policy.
+4. Give required details i.e. Policy name and description.
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],                        // Gives permission to the buckets
+      "Resource": ["arn:aws:s3:::test"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [                                                   // Gives permission to objects inside this bucket
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": ["arn:aws:s3:::test/*"]
+    }
+  ]
+
+
+What will be the outcome of this IAM Policy?
+
+
+{
+"Version": "2012-10-17",
+"Statement": [{
+"Action": "ec2:*",           // For an action of EC2 instances using any resource, will be allowed 
+"Resource": "*",
+"Effect": "Allow"
+},
+{
+"Action": "*",                   // For any other action using any resource, this usage will be denied                                                        
+"Resource": "*",
+"Effect": "Deny"
+}
+]
+}
+
+
+Steps to launch EC2 Instance
+
+
+1. Go to AWS Management Console.
+2. Select any one Region.
+3. Go to EC2 under the Compute Section.
+4. Click on the Launch Instance and select an AMI.
+5. Select the Instance type i.e. amount of compute power required.
+6. Configure all the details.
+7. Click on the Storage device and configure all the details.
+8. Go to tag Instance for uniquely identification of your Instance.
+9. Configure all the Security Group.
+10. Check all the settings and after reviewing, Launch it.
+11. You will be prompted with a window for your Key-Pair, create one and download it at a location which is easily accessible.
+12. Select your Instance from the screen and click on connect.
+13. On the prompted screen you will be shown a public IP, copy it and click on get password.
+14. Now, the next step would be to decrypt the password with the help of your public key. So, upload the Key-Pair and click on decrypt password.
+15. Open Remote Desktop Manager, enter the Public IP and click on connect.
+16. Now, enter the password and click on OK to get your EC2 Instance.
+
+
+Hosting Static Website on Amazon S3
+
+
+1. Create a bucket by navigating to S3 in the AWS Management Console and hit Create Bucket. You’ll be prompted to enter a name and a region.
+2. Now, Verify the Created Bucket.
+3. To enable Static Website Hosting, just select it from the properties panel on the right.
+4. Create a Html File. You can also set an error page if you want. When you’re done, hit Save.
+5. To upload the file, select your new bucket and hit the Start Upload button.
+6. Make the Html File Public, to make html file public, right-click on index.html and select Make Public
+7. Now, select html in the console and go to the Properties tab.
+8. Final Step to Verify the Result by clicking the link which will take you to your new homepage.
+
+
+Steps to create public and private subnets in VPC
+
+
+1. Navigate to the VPC Dashboard. Here you will see a “Launch VPC Wizard” click on it.
+2. This is the “VPC creation” wizard. Here you can find 4 different options. 
+1. VPC with Single Public Subnet, the one we are going to choose.
+2. VPC with Public and Private Subnets.
+                    3. VPC with Public and Private Subnets and Hardware VPN Access.
+4. VPC with a Private Subnet only and Hardware VPN Access.
+Since we want to create public and private subnet, we will start by creating a VPC with a public and private subnet. Click on “Select“.
+3. Here you will have to mention a few details for creating your VPC. After mentioning all the details, click on “Create VPC“.
+4. You will get a message saying “Your VPC has been successfully created“. Click on “OK“.
+5. In the “Your VPC” section, you can see that there is a new VPC named “EdurekaDemo” created.
+6. Now let’s verify the public subnet. You can see that a subnet named “Public Subnet” is created. This subnet has a route table attached which consists of local and public access with an Internet Gateway.
